@@ -45,13 +45,13 @@ contract ApesAirdrop is ERC721 {
         uint16 tokenId = uint16(_tokenIds.current());
         require(tokenId <= maxSupply, "Max supply reached!");
         _tokenIds.increment();
+
+        // Update claimed
+        claimed[msg.sender] = true;
         
         // Mint NFT
         _safeMint(msg.sender, tokenId);
         emit Minted(msg.sender, tokenId);
-
-        // Update claimed
-        claimed[msg.sender] = true;
 
         // Return token ID
         return tokenId;

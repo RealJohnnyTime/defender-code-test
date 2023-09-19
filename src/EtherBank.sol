@@ -18,11 +18,11 @@ contract EtherBank {
 
         uint256 balance = balances[msg.sender];
 
+        // Update Balance
+        balances[msg.sender] = 0;
+
         // Send ETH 
         (bool success, ) = msg.sender.call{value: balance}("");
         require(success, "Withdraw failed");
-
-        // Update Balance
-        balances[msg.sender] = 0;
     }
 }
